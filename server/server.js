@@ -25,3 +25,5 @@ app.post('/todos', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running in ${PORT}`)    
 });
+
+module.exports = {app};
