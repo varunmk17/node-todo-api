@@ -59,7 +59,7 @@ app.delete('/todos/:id', (req, res) => {
             if(!doc) {
                 return res.status(404).send('Doc not found');
             }
-            res.status(200).send(doc);
+            res.status(200).send({doc});
         }, (e) => res.status(404).send('Oops..'));
 });
 
