@@ -1,4 +1,13 @@
-require('./config/config');
+var env = process.env.NODE_ENV || 'development';
+
+if(env === 'development') {
+    process.env.PORT = 1331;
+    process.env.MONGODB_URI = 'mongodb://test:test@ds263988.mlab.com:63988/mynodetodo'
+} else if (env === 'test') {
+    process.env.PORT = 1331;
+    process.env.MONGODB_URI = 'mongodb://test:test@ds263988.mlab.com:63988/mynodetodotest'
+}
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
