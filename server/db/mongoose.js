@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
-const mongodbUrl = 'mongodb://test:test@ds263988.mlab.com:63988/mynodetodo';
+const mongodbUri = process.env.MONGODB_URI;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(mongodbUrl);
+mongoose.connect(mongodbUri);
 
 module.exports = {mongoose};

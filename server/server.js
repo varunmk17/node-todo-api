@@ -1,8 +1,9 @@
+const config = require('./config/config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const _ = require('lodash');
 const {ObjectId} = require('mongodb');
-const PORT = process.env.PORT || 1331;
+const PORT = process.env.PORT;
 
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
