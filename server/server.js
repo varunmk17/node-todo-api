@@ -17,6 +17,7 @@ const PORT = process.env.PORT;
 var {mongoose} = require('./db/mongoose');
 var {Todo} = require('./models/todo');
 var {User} = require('./models/user');
+var {authenticate} = require('./middleware/authenticate');
 
 var app = express();
 app.use(bodyParser.json());
@@ -48,8 +49,7 @@ app.get('/todos/:id', (req, res) => {
         return res.status(404).send('Invalid Id');
     }
 
-    var todo = Todo.findById(id)
-                .then((todo) => {
+    var todo = Todo.findById(id).then((todo) => {
                     if(!todo) {
                         return res.status(404).send('Todo not found');
                     }
@@ -109,6 +109,14 @@ app.post('/users', (req, res) => {
     }).then((token) => {
         res.header('x-auth', token).send(user);
     }).catch((err) => res.status(400).send(err));
+});
+
+
+
+
+
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
 });
 
 
