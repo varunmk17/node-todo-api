@@ -116,7 +116,7 @@ app.get('/users/me', authenticate, (req, res) => {
 });
 
 
-// POST / users/login {email, password}
+// POST /users/login {email, password}
 app.post('/users/login', (req, res) => {
     var body = _.pick(req.body, ['email', 'password']);
 
@@ -125,6 +125,15 @@ app.post('/users/login', (req, res) => {
             res.header('x-auth', token).send(user);
         });
     }).catch((err) => {
+        res.status(400).send();
+    });
+});
+
+//DELETE /users/me/token
+app.delete('/users/me/token', authenticate, (req, res) => {
+    req.user.removeToken(req.token).then(() => {
+        res.status(200).send();
+    }, () => {
         res.status(400).send();
     });
 });
